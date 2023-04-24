@@ -1,0 +1,25 @@
+.main {
+    width: 100%;
+    padding: 24px;
+    background-color: #e38b29;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.route {
+    font-size: medium;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    margin: 0px 12px;
+}
+
+.content {
+    background-color: red;
+}
+
+body {
+    margin: 0;
+}
+

@@ -65,6 +65,7 @@ interface Props {
   onNodesChange: (newNodes: NodeProps[]) => void;
   onEdgesChange: (newEdges: EdgeProps[]) => void;
   height: number;
+  setSelectedIndex: void;
 }
 
 function getEdgeId(
@@ -276,11 +277,14 @@ const FlowChart: Component<Props> = (props: Props) => {
   }
 
   function handleOnNodePress(deltaX: number, deltaY: number, index) {
+    //toggling class did open card on canvas we shall open data to left toolbar instead
+    /*
     const selectedCard = document.querySelector("#card-" + index);
     if (selectedCard?.classList.contains("card-content-hide"))
       selectedCard?.classList.remove("card-content-hide");
     else selectedCard?.classList.add("card-content-hide");
-
+    */
+    props.setSelectedIndex(index);
     setClickedDelta({ x: deltaX, y: deltaY });
   }
 

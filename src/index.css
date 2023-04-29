@@ -1,7 +1,14 @@
+@import "@itcenteratunihelsinki/huds-lib/dist/fonts/fonts.css";
+@import "@itcenteratunihelsinki/huds-lib/dist/collection/components/button/button.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .card-content-hide {
     display: none;
+}
+
+body {
+    font-family: 'Open Sans', 'Arial', sans-serif;
 }

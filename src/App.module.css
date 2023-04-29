@@ -1,16 +1,86 @@
-
 .root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: var(--brand-main-nearly-black);
+  
+}
+
+.tool {
+  width: 30vw;
+  height: 200px;
+  color: white;
+  margin: 16px;
+}
+
+.tool > div {
+  margin: 12px 0;
+}
+
+.toolbutton {
+  background-color: var(--brand-main-light);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.servicecard {
+  background-color: white;
+  font-size: 12px;
+  color: black;
+  padding: 8px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  height: 40vh;
+  width: calc(30vw - 16px);
+}
+
+.h1title {
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.h2tool {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.logotext {
+  color: white;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas {
     display: flex;
     height: 100vh;
-    width: 100vw;
+    width: calc(100vw - 200px);
     flex-direction: column;
     background: #eee;
   }
 
+  .inputfilter {
+    margin: 8px 0px;
+  }
+
+  .inputfilter input {
+    color: black;
+    padding: 8px;
+    width: calc(30vw - 16px);
+  }
+
   .textarea {
-    background-color: whitesmoke;
+    background-color: white;
     padding: 4px;
-    border: 2px solid orange;
+    border: 2px solid gray;
+    width: calc(100% - 32px);
+    color: black;
+    font-size: 12px;
+    
   }
   
   .header {
@@ -51,4 +121,21 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
+  }
+
+  .loading {
+    position: relative;
+    color: white;
+    font-size: 50px;
+    font-weight: 700;
+    width: 70vw;
+    height: 100%;
+  }
+
+  .loadingtext {
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    position: absolute;
   }

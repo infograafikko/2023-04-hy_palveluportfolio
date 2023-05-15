@@ -58,7 +58,12 @@ const Simple: Component = () => {
           </p>
           <div class={css.inputfilter}>
             <h3>Valitse käyttäjäryhmä</h3>
-            <select onChange={(e) => setFilterGroupOne(e.target.value)}>
+            <select
+              onChange={(e) => {
+                setFilterGroupOne(e.target.value);
+                handleChange();
+              }}
+            >
               <option value="" selected>
                 Kaikki
               </option>

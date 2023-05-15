@@ -57,7 +57,7 @@ const Simple: Component = () => {
             palvelukortit näytetään.
           </p>
           <div class={css.inputfilter}>
-            <h3>Kirjoita käyttäjäryhmä</h3>
+            <h3>Valitse käyttäjäryhmä</h3>
             <select onChange={(e) => setFilterGroupOne(e.target.value)}>
               <option value="" selected>
                 Kaikki

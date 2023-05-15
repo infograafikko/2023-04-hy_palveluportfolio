@@ -64,7 +64,11 @@ export const formJson = (tsv, filterOne, filterTwo) => {
       id: "parentnode-" + i,
       position: { x: 50, y: 100 * indexOfFirstChildCard + 100 },
       data: {
-        content: <p style={{ "max-width": "300px" }}>{d}</p>,
+        content: (
+          <p style={{ "max-width": "300px" }}>
+            <b>{d}</b>
+          </p>
+        ),
       },
       inputs: 0,
       outputs: 1,

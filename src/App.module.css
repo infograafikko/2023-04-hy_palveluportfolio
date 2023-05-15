@@ -6,7 +6,7 @@
   flex-direction: row;
 
   @media only screen and (max-width: 550px) {
-      flex-direction: column-reverse;
+      flex-direction: column;
 
   }
 }
@@ -15,11 +15,12 @@
   width: 30vw;
   color: white;
   margin: 16px;
+  overflow-y: scroll;
   
   @media only screen and (max-width: 550px) {
     width: 100vw;
     max-height: 30vh;
-    overflow-y: scroll;
+    
   }
 }
 
@@ -42,13 +43,19 @@
   padding: 8px;
   overflow-y: scroll;
   overflow-x: scroll;
-  height: 40vh;
+  height: 20vh;
+  overflow-y: scroll;
   width: calc(30vw - 16px);
 
   @media only screen and (max-width: 550px) {
     width: calc(100vw - 32px);
   }
 
+}
+
+.servicecard a {
+  text-decoration: underline;
+  font-weight: 700;
 }
 
 .h1title {
@@ -86,6 +93,12 @@
     margin: 8px 0px;
   }
 
+  .inputfilter select {
+    color: black;
+    padding: 8px;
+    width: calc(30vw - 16px);
+  }
+
   .inputfilter input {
     color: black;
     padding: 8px;
@@ -100,7 +113,7 @@
     background-color: white;
     padding: 4px;
     border: 2px solid gray;
-    width: calc(100% - 32px);
+    width: calc(100% - 16px);
     color: black;
     font-size: 12px;
     

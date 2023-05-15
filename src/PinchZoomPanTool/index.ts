@@ -16,7 +16,7 @@ interface IOptions {
   captureWheel?: boolean;
 }
 
-export function create({ element, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, captureWheel }: Readonly<IOptions>) {
+export function create({ element, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, captureWheel, nodeLen }: Readonly<IOptions>) {
   const touch = isTouch();
 
   let action: Action = 'none';
@@ -112,7 +112,8 @@ export function create({ element, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, captur
   const { width, height } = element.getBoundingClientRect();
   //setState({ x: width / 2, y: height / 2, z: state.z });
   //left top corner
-  setState({ x: width, y: height, z: 0.5 });
+  setState({ x: width * 0.75, y: nodeLen * 24, z: 0.5 });
+  
 
 
   // subscribe

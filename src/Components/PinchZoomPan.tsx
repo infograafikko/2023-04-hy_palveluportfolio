@@ -21,6 +21,7 @@ function PinchZoomPan(props: IProps) {
       minZoom: props.min,
       maxZoom: props.max,
       captureWheel: props.captureWheel,
+      nodeLen: props.height,
     });
   });
 

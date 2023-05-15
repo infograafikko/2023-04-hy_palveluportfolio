@@ -1,6 +1,6 @@
 import { For, Show, createEffect } from "solid-js";
 import css from "./App.module.css";
-
+import snarkdown from "snarkdown";
 const ParentCard = (props) => {
   return (
     <p>
@@ -10,13 +10,12 @@ const ParentCard = (props) => {
 };
 
 const ChildCard = (props) => {
-  console.log(props);
   return (
     <p style={{ margin: "6px 0" }}>
       <b>{props.title}:</b>{" "}
       {props.text.split("\r").map((r) => (
         <>
-          <span>{r}</span>
+          <span innerHTML={snarkdown(r)} />
           <br />
         </>
       ))}
@@ -46,6 +45,10 @@ const ServiceCard = (props) => {
             }}
           </For>
         )}
+      </Show>
+      <Show when={!keys()}>
+        Voit tarkastella haluamaasi palvelukorttia lähemmin valitsemalla sen
+        oikealla näkyvästä visualisoinnista.
       </Show>
     </div>
   );

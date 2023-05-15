@@ -1,8 +1,7 @@
 export const formJson = (tsv, filterOne, filterTwo) => {
-  console.log(filterOne);
-
   const splitTsv = tsv.split("\n");
   const tsvTitles = splitTsv.shift()?.split("\t");
+
   const tsvBody = splitTsv.map((t) => t.split("\t"));
 
   const arr: [] = [];
@@ -17,15 +16,24 @@ export const formJson = (tsv, filterOne, filterTwo) => {
 
   const filteredArr = arr.filter((d) => {
     //Filter one should match index 2
+    const filterOneSmall = filterOne.toLowerCase();
+    const filterTwoSmall = filterTwo.toLowerCase();
+    console.log(filterOneSmall, filterTwoSmall);
 
     if (filterOne.length === 0 && filterTwo.length === 0) return true;
-    else if (d[tsvTitles[2]].includes(filterOne) && filterTwo.length === 0)
-      return true;
-    else if (d[tsvTitles[5]].includes(filterTwo) && filterOne.length === 0)
+    else if (
+      d[tsvTitles[2]]?.toLowerCase()?.includes(filterOneSmall) &&
+      filterTwo.length === 0
+    )
       return true;
     else if (
-      d[tsvTitles[2]].includes(filterOne) &&
-      d[tsvTitles[5]].includes(filterTwo)
+      d[tsvTitles[5]]?.toLowerCase().includes(filterTwoSmall) &&
+      filterOne.length === 0
+    )
+      return true;
+    else if (
+      d[tsvTitles[2]]?.toLowerCase()?.includes(filterOneSmall) &&
+      d[tsvTitles[5]]?.toLowerCase()?.includes(filterTwoSmall)
     )
       return true;
     else return false;

@@ -64,6 +64,7 @@ const NodesBoard: Component<Props> = (props: Props) => {
       class={styles.main}
       onMouseMove={handleOnMouseMoveScene}
       onMouseUp={handleOnMouseUpScene}
+      id="nodecontainer"
     >
       <For each={props.nodes}>
         {(node: NodeProps, index: Accessor<number>) => (

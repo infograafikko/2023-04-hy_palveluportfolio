@@ -10,26 +10,27 @@ const ParentCard = (props) => {
 };
 
 const ChildCard = (props) => {
+  const text = () => props.text;
+
   return (
     <p style={{ margin: "6px 0" }}>
-      <b>{props.title}:</b>{" "}
-      {props.text.split("\r").map((r) => (
-        <>
-          <span innerHTML={snarkdown(r)} />
-          <br />
-        </>
-      ))}
+      <b>{props?.title}:</b>{" "}
+      {text()
+        ?.split("\r")
+        .map((r) => (
+          <>
+            <span innerHTML={snarkdown(r)} />
+            <br />
+          </>
+        ))}
     </p>
   );
 };
 
 const ServiceCard = (props) => {
   const keys = () => props?.data && Object.keys(props?.data);
-  const getValue = (index, key) => props.data[index][key];
+  const getValue = (index, key) => props?.data[index][key];
   const dataType = (match) => typeof props?.data === match;
-  createEffect(() => {
-    console.log(typeof props.data === "object");
-  });
 
   return (
     <div class={css.servicecard}>

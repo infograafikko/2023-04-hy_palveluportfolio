@@ -18,8 +18,10 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
+    "@digichanges/solid-multiselect": "^0.0.10",
     "@itcenteratunihelsinki/huds-lib": "^0.8.42",
     "@solid-primitives/event-listener": "^2.2.12",
+    "@thisbeyond/solid-select": "^0.14.0",
     "huds-lib": "link:@itcenteratunihelsinki/huds-lib",
     "pinch-zoom-pan": "^3.0.0",
     "snarkdown": "^2.0.0",

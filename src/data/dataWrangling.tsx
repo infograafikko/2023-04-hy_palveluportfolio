@@ -14,6 +14,8 @@ export const formJson = (tsv, filterOne, filterTwo) => {
     });
   });
 
+  /*
+
   const filteredArr = arr.filter((d) => {
     //Filter one should match index 2
     const filterOneSmall = filterOne.toLowerCase();
@@ -38,8 +40,9 @@ export const formJson = (tsv, filterOne, filterTwo) => {
       return true;
     else return false;
   });
+  */
 
-  const sortedArr = filteredArr.sort((a, b) => {
+  const sortedArr = arr.sort((a, b) => {
     const at = a[tsvTitles[0]];
     const bt = b[tsvTitles[0]];
 
@@ -53,6 +56,20 @@ export const formJson = (tsv, filterOne, filterTwo) => {
   //get unique parent cards
   const parentCards = [...new Set(sortedArr.map((d) => d[tsvTitles[0]]))];
 
+  const usergroupsPerParents = parentCards.map((p) => {
+    const filtered = sortedArr.filter((d) => p === d[tsvTitles[0]]);
+    const userGroups = filtered.map((f) => f[tsvTitles[2]].toLowerCase());
+    const unique = [...new Set(userGroups)];
+    return unique;
+  });
+
+  const ownerPerParents = parentCards.map((p) => {
+    const filtered = sortedArr.filter((d) => p === d[tsvTitles[0]]);
+    const userGroups = filtered.map((f) => f[tsvTitles[6]].toLowerCase());
+    const unique = [...new Set(userGroups)];
+    return unique;
+  });
+
   //create edges and nodes
   const enObj = { edges: [], nodes: [], arr: [...parentCards, ...sortedArr] };
 
@@ -60,14 +77,20 @@ export const formJson = (tsv, filterOne, filterTwo) => {
     const indexOfFirstChildCard = sortedArr
       .map((a) => a[tsvTitles[0]])
       .indexOf(d);
+
     enObj.nodes.push({
       id: "parentnode-" + i,
       position: { x: 50, y: 100 * indexOfFirstChildCard + 100 },
       data: {
         content: (
-          <p style={{ "max-width": "300px" }}>
+          <div
+            class="node-holder"
+            usergroups={usergroupsPerParents[i].toString()}
+            owner={ownerPerParents[i].toString()}
+            style={{ "max-width": "300px" }}
+          >
             <b>{d}</b>
-          </p>
+          </div>
         ),
       },
       inputs: 0,
@@ -82,7 +105,12 @@ export const formJson = (tsv, filterOne, filterTwo) => {
       position: { x: 750, y: 100 * i + 100 },
       data: {
         content: (
-          <div style={{ "max-width": "400px" }}>
+          <div
+            usergroups={d?.[tsvTitles[2]].toLowerCase()}
+            owner={d?.[tsvTitles[6]].toLowerCase()}
+            class="node-holder"
+            style={{ "max-width": "400px" }}
+          >
             <div class="card-title">
               <p>{d[tsvTitles[1]]}</p>
             </div>
@@ -92,9 +120,9 @@ export const formJson = (tsv, filterOne, filterTwo) => {
             >
               {tsvTitles.map((t) => {
                 return (
-                  <p>
+                  <div>
                     <b>{t}</b>: {d[t]}
-                  </p>
+                  </div>
                 );
               })}
             </div>

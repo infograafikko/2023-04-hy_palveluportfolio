@@ -65,7 +65,6 @@ const App: Component = () => {
   };
 
   const handleKeyPress = (key) => {
-    key === "Enter" && handleChange();
     key.includes("Arrow") && changeSelectedByArrow(key);
   };
 

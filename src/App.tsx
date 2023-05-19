@@ -33,16 +33,18 @@ function fireMouseEvents(query, eventNames) {
   }
 }
 
+const filterOneValues = [
+  "johto",
+  "opettaja",
+  "oppija",
+  "tutkija",
+  "työntekijä",
+  "yhteiskunta",
+];
+
 const App: Component = () => {
   const [tsv, setTsv] = createSignal(initialTsv);
-  const [filterGroupOne, setFilterGroupOne] = createSignal([
-    "oppija",
-    "työntekijä",
-    "johto",
-    "tutkija",
-    "opettaja",
-    "yhteiskunta",
-  ]);
+  const [filterGroupOne, setFilterGroupOne] = createSignal(filterOneValues);
   const [filterGroupTwo, setFilterGroupTwo] = createSignal("");
 
   const [formedJson, setFormedJson] = createSignal(
@@ -110,6 +112,7 @@ const App: Component = () => {
     //console.log(formedJson().nodes.length);
     //console.log(selectedIndex());
     //console.log(formedJson().arr?.[selectedIndex()]);
+    console.log(filterGroupOne());
     fireMouseEvents(
       `#nodecontainer .nodeChild:nth-child(${selectedIndex() + 1})`,
       ["mouseover", "mousedown", "mouseup", "click"]
@@ -122,46 +125,57 @@ const App: Component = () => {
         <div style="background-color: var(--brand-main-nearly-black);">
           <Logo />
         </div>
-        <h1 class={css.h1title + " text-xxl"}>Tutki palvelu-portfoliota</h1>
+        <h1 class={css.h1title}>
+          Tutki <br />
+          palvelu&shy;portfoliota
+        </h1>
         <div>
           <h2 class={css.h2tool}>Valittu palvelukortti</h2>
           <ServiceCard data={formedJson().arr?.[selectedIndex()]} />
         </div>
         <div>
           <h2 class={css.h2tool}>Rajaa ja muuta dataa</h2>
-          <p>
+          {/* {<p>
             Alla olevissa tekstikentissä voit rajata hakusanoilla, mitkä
             palvelukortit näytetään.
-          </p>
+          </p>} */}
+          <div class={css.inputfilter}>
+            <fieldset
+              onChange={(e) => {
+                const checkboxValue = e.target.name;
+                const index = filterGroupOne().indexOf(checkboxValue);
+                const newFilterGroupOne = [...filterGroupOne()];
+                index >= 0
+                  ? newFilterGroupOne.splice(index, 1)
+                  : newFilterGroupOne.push(checkboxValue);
+
+                setFilterGroupOne(newFilterGroupOne);
+                handleChange();
+              }}
+            >
+              <legend>Valitse käyttäjäryhmät:</legend>
+              <For each={filterOneValues}>
+                {(el, i) => (
+                  <div>
+                    <input
+                      style={{ "margin-right": "4px" }}
+                      type="checkbox"
+                      id={el}
+                      name={el}
+                      checked
+                    />
+                    <label for={el}>{el}</label>
+                  </div>
+                )}
+              </For>
+            </fieldset>
+          </div>
           <div class={css.inputfilter}>
             <h3>Kirjoita palvelutuotannon omistaja</h3>
             <input
+              id="ownerinput"
               onInput={(e) => setFilterGroupTwo(e.target.value)}
               type="text"
-            />
-          </div>
-          <div class={css.inputfilter}>
-            <h3>Valitut käyttäjäryhmät</h3>
-            <MultiSelect
-              style={{ chips: { color: "black", "background-color": "white" } }}
-              options={[
-                "oppija",
-                "työntekijä",
-                "johto",
-                "tutkija",
-                "opettaja",
-                "yhteiskunta",
-              ]}
-              onSelect={(d) => {
-                setFilterGroupOne(d);
-                handleChange();
-              }}
-              onRemove={(d) => {
-                setFilterGroupOne(d);
-                handleChange();
-              }}
-              selectedValues={filterGroupOne()}
-              hidePlaceholder={true}
             />
           </div>
           <h2 class="my-2">

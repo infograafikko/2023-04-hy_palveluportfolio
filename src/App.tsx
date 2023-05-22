@@ -7,7 +7,6 @@ import {
   onCleanup,
 } from "solid-js";
 import { WindowEventListener } from "@solid-primitives/event-listener";
-import { MultiSelect } from "@digichanges/solid-multiselect";
 
 import { Node, Edge, SolidFlow } from "./SolidFlow/src/index";
 import PinchZoomPan from "./Components/PinchZoomPan";
@@ -45,11 +44,8 @@ const filterOneValues = [
 const App: Component = () => {
   const [tsv, setTsv] = createSignal(initialTsv);
   const [filterGroupOne, setFilterGroupOne] = createSignal(filterOneValues);
-  const [filterGroupTwo, setFilterGroupTwo] = createSignal("");
-
-  const [formedJson, setFormedJson] = createSignal(
-    formJson(tsv(), filterGroupOne(), filterGroupTwo())
-  );
+  const [loading, setLoading] = createSignal(false);
+  const [formedJson, setFormedJson] = createSignal(formJson(tsv()));
 
   const [selectedIndex, setSelectedIndex] = createSignal(0);
 
@@ -112,7 +108,7 @@ const App: Component = () => {
     //console.log(formedJson().nodes.length);
     //console.log(selectedIndex());
     //console.log(formedJson().arr?.[selectedIndex()]);
-    console.log(filterGroupOne());
+    //console.log(filterGroupOne());
     fireMouseEvents(
       `#nodecontainer .nodeChild:nth-child(${selectedIndex() + 1})`,
       ["mouseover", "mousedown", "mouseup", "click"]
@@ -170,14 +166,14 @@ const App: Component = () => {
               </For>
             </fieldset>
           </div>
-          <div class={css.inputfilter}>
+          {/* <div class={css.inputfilter}>
             <h3>Kirjoita palvelutuotannon omistaja</h3>
             <input
               id="ownerinput"
               onInput={(e) => setFilterGroupTwo(e.target.value)}
               type="text"
             />
-          </div>
+          </div> */}
           <h2 class="my-2">
             Visualisoinnin data (liitä tähän data taulukosta)
           </h2>
@@ -189,30 +185,39 @@ const App: Component = () => {
           >
             {tsv()}
           </textarea>
-          <button onClick={() => handleChange()} class={css.toolbutton}>
+          <button
+            onClick={() => {
+              setLoading(true);
+              setFormedJson(formJson(tsv()));
+              setTimeout(() => setLoading(false), 0);
+            }}
+            class={css.toolbutton}
+          >
             Päivitä data
           </button>
           <WindowEventListener onkeydown={(e) => handleKeyPress(e.key)} />
         </div>
       </section>
-      <section class={css.canvas}>
-        <PinchZoomPan
-          height={formedJson().nodes.length}
-          min={0.25}
-          max={2.5}
-          captureWheel
-          class={css.wrapper}
-        >
-          <SolidFlow
-            //nodes={nodes()}
-            //edges={edges()}
+      <Show when={!loading()}>
+        <section class={css.canvas}>
+          <PinchZoomPan
             height={formedJson().nodes.length}
-            nodes={formedJson().nodes}
-            edges={formedJson().edges}
-            setSelectedIndex={setSelectedIndex}
-          />
-        </PinchZoomPan>
-      </section>
+            min={0.25}
+            max={2.5}
+            captureWheel
+            class={css.wrapper}
+          >
+            <SolidFlow
+              //nodes={nodes()}
+              //edges={edges()}
+              height={formedJson().nodes.length}
+              nodes={formedJson().nodes}
+              edges={formedJson().edges}
+              setSelectedIndex={setSelectedIndex}
+            />
+          </PinchZoomPan>
+        </section>
+      </Show>
     </div>
   );
 };

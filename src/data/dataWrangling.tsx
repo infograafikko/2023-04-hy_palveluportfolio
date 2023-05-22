@@ -1,4 +1,4 @@
-export const formJson = (tsv, filterOne, filterTwo) => {
+export const formJson = (tsv) => {
   const splitTsv = tsv.split("\n");
   const tsvTitles = splitTsv.shift()?.split("\t");
 
@@ -14,34 +14,6 @@ export const formJson = (tsv, filterOne, filterTwo) => {
     });
   });
 
-  /*
-
-  const filteredArr = arr.filter((d) => {
-    //Filter one should match index 2
-    const filterOneSmall = filterOne.toLowerCase();
-    const filterTwoSmall = filterTwo.toLowerCase();
-    console.log(filterOneSmall, filterTwoSmall);
-
-    if (filterOne.length === 0 && filterTwo.length === 0) return true;
-    else if (
-      d[tsvTitles[2]]?.toLowerCase()?.includes(filterOneSmall) &&
-      filterTwo.length === 0
-    )
-      return true;
-    else if (
-      d[tsvTitles[5]]?.toLowerCase().includes(filterTwoSmall) &&
-      filterOne.length === 0
-    )
-      return true;
-    else if (
-      d[tsvTitles[2]]?.toLowerCase()?.includes(filterOneSmall) &&
-      d[tsvTitles[5]]?.toLowerCase()?.includes(filterTwoSmall)
-    )
-      return true;
-    else return false;
-  });
-  */
-
   const sortedArr = arr.sort((a, b) => {
     const at = a[tsvTitles[0]];
     const bt = b[tsvTitles[0]];
@@ -50,7 +22,6 @@ export const formJson = (tsv, filterOne, filterTwo) => {
     else if (at > bt) return 1;
     else return 0;
   });
-  console.log(sortedArr);
 
   //there are two levels of cards - use first title as parent card (tsvTitles[0])
   //get unique parent cards
@@ -146,7 +117,6 @@ export const formJson = (tsv, filterOne, filterTwo) => {
       targetInput: 0,
     });
   });
-
   console.log(enObj);
   return enObj;
 };

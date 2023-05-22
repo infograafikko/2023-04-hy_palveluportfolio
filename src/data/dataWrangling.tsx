@@ -117,6 +117,5 @@ export const formJson = (tsv) => {
       targetInput: 0,
     });
   });
-  console.log(enObj);
   return enObj;
 };

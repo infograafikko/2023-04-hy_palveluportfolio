@@ -46,6 +46,7 @@ const App: Component = () => {
   const [filterGroupOne, setFilterGroupOne] = createSignal(filterOneValues);
   const [loading, setLoading] = createSignal(false);
   const [formedJson, setFormedJson] = createSignal(formJson(tsv()));
+  const [wholeExplainer, showWholeExplainer] = createSignal(false);
 
   const [selectedIndex, setSelectedIndex] = createSignal(0);
 
@@ -125,12 +126,31 @@ const App: Component = () => {
           Tutki <br />
           palvelu&shy;portfoliota
         </h1>
+        <Show when={!wholeExplainer()}>
+          <p class="mt-3">
+            Palveluportfoliosta löydät{" "}
+            <span
+              onClick={() => showWholeExplainer(true)}
+              class="underline cursor-pointer"
+            >
+              (klikkaa lukeaksesi lisää...)
+            </span>
+          </p>
+        </Show>
+        <Show when={wholeExplainer()}>
+          <p class="mt-3">
+            Palveluportfoliosta löydät Yliopistopalveluiden
+            palvelukokonaisuudet, palvelut ja palvelukortit. Klikkaamalla
+            palvelua avautuu palvelukortti, josta löytyy palveluun liittyviä
+            tietoja. Valitun palvelun tunnistat tummansinisestä taustasta.
+          </p>
+        </Show>
         <div>
           <h2 class={css.h2tool}>Valittu palvelukortti</h2>
           <ServiceCard data={formedJson().arr?.[selectedIndex()]} />
         </div>
         <div>
-          <h2 class={css.h2tool}>Rajaa ja muuta dataa</h2>
+          <h2 class={css.h2tool}>Rajaa näytettäviä palveluita</h2>
           {/* {<p>
             Alla olevissa tekstikentissä voit rajata hakusanoilla, mitkä
             palvelukortit näytetään.
@@ -174,9 +194,7 @@ const App: Component = () => {
               type="text"
             />
           </div> */}
-          <h2 class="my-2">
-            Visualisoinnin data (liitä tähän data taulukosta)
-          </h2>
+          <h2 class="my-2">Visualisoinnin data (vain pääkäyttäjille)</h2>
           <textarea
             class={css.textarea}
             onInput={(e) => setTsv(e.target.value)}

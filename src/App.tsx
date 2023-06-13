@@ -1,15 +1,8 @@
-import {
-  Component,
-  Show,
-  batch,
-  createEffect,
-  createSignal,
-  onCleanup,
-} from "solid-js";
+import { Component, Show, createEffect, createSignal } from "solid-js";
 import { WindowEventListener } from "@solid-primitives/event-listener";
 
-import { Node, Edge, SolidFlow } from "./SolidFlow/src/index";
-import PinchZoomPan from "./Components/PinchZoomPan";
+import { SolidFlow } from "./SolidFlow/src/index";
+import PinchZoomPan from "./PinchZoomPanTool/PinchZoomPanTool";
 import css from "./App.module.css";
 import { initialTsv } from "./data/data";
 import Logo from "./assets/Logo";

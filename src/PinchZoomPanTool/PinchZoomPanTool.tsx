@@ -1,5 +1,5 @@
 import { JSX, onCleanup } from "solid-js";
-import { create } from "../PinchZoomPanTool";
+import { create } from "./src";
 import css from "./PinchZoomPan.module.css";
 
 interface IProps {

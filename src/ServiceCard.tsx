@@ -1,4 +1,4 @@
-import { For, Show, createEffect } from "solid-js";
+import { For, Show } from "solid-js";
 import css from "./App.module.css";
 import snarkdown from "snarkdown";
 const ParentCard = (props) => {

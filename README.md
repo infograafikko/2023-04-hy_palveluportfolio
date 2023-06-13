@@ -1,38 +1,15 @@
-## Projekti
+# Projekti
 
 Tämä on Helsingin yliopiston palveluportfoliota esittävä interaktiivinen visualisointi.
 
-## Usage
+Projekti on rakennettu SolidJS:llä hyödyntäen SolidFlow-kirjastoa https://github.com/miguelsalesvieira/solid-flow Koska paketissa oli asioita, joita oli tarvetta räätälöidä, sen sisältämä koodi on tweakattuna liitetty projektin `SolidFlow`-kansion.
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+Saman operaation tein myös PinchZoomPan-kirjastolle https://github.com/SanichKotikov/pinch-zoom-pan joka hoitaa canvasin zoomailua ja siirtelyä projektissa.
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+Projektin css on yhdistelmä Tailwindiä ja CSS-moduuleja.
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+Projektin käyttämä data on `data.ts`-tiedostossa. Sen sisältämässä `initialTsv`-muuttujassa data on tsv-muodossa ja se parsitaan koodissa JSONiksi. Tähän ratkaisuun päädyttiin sen vuoksi, että Excelistä voi copy-pastettaa dataa frontin tekstilaatikkoon tai muuttujaan. Kun kopioit Excelistä dataa huomioi ainakin seuraavat seikat.
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm dev` or `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+- \r parsitaan rivivaihtona. Excelin natiiveja rivivaihtoja ei voi käyttää, koska se rikkoo tsv-tiedoston
+- Tekstimuotoiluja voi tehdä Markdown-muotoisesti esimerkiksi boldaamalla tekstiä tai luomalla hyperlinkkejä
+- Tyhjiä soluja ei hyväksytä. Laita esimerkiksi viiva (-) sellaisiin kohtiin, joihin ei haluta tietoa
